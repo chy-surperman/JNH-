@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--扫描控制器,只扫描控制器-->
+    <!--<context:component-scan base-package="com.chy.curd.controller"></context:component-scan>-->
+    <!--<context:component-scan base-package="com.chy" use-default-filters="false">-->
+    <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:include-filter>-->
+    <!--</context:component-scan>-->
+    <context:component-scan base-package="com.chy.controller" />
+    <!-- 配置注解驱动 -->
+    <!--将Springmvc不能处理的请求交给servlet-->
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+    <!--能支持springmvc更加高级的配置，jsr303校验 ajax请求。。。映射动态请求-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置上传最大尺寸为5MB-->
+        <!--<property name="maxUploadSizePerFile" value="5242880"/>-->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="resolveLazily" value="true"/>
+    </bean>
+    <!--视图解析器适配器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/view/back/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+</beans>
